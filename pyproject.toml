@@ -1,0 +1,24 @@
+[project]
+name = "scc-sdk-workflows"
+version = "0.1.0"
+description = "Runnable Cisco Security Cloud Control SDK workflow examples"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "cisco-scc-sdk",
+]
+
+[project.scripts]
+scc-connect-sdk = "scc_sdk_workflows.connect:main"
+scc-list-orgs = "scc_sdk_workflows.list_orgs:main"
+scc-claim-subscription = "scc_sdk_workflows.claim_subscription:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
