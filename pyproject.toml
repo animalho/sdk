@@ -6,12 +6,15 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "cisco-scc-sdk",
+    "mcp",
+    "openai",
 ]
 
 [project.scripts]
-scc-connect-sdk = "scc_sdk_workflows.connect:main"
 scc-list-orgs = "scc_sdk_workflows.list_orgs:main"
-scc-claim-subscription = "scc_sdk_workflows.claim_subscription:main"
+scc-read-claim-code = "scc_sdk_workflows.read_claim_code:main"
+scc-run-workflow = "scc_sdk_workflows.run_workflow:main"
+scc-mcp-agent = "scc_sdk_workflows.mcp_agent:main"
 
 [build-system]
 requires = ["setuptools>=68"]

@@ -21,11 +21,10 @@ def _require_sdk() -> tuple[Any, Any]:
 
 
 def get_access_token() -> str:
-    token = os.getenv("SCC_ACCESS_TOKEN") or os.getenv("SCC_API_KEY")
+    token = os.getenv("SCC_API_KEY_TOKEN")
     if not token:
         raise SystemExit(
-            "Missing SCC access token. Set `SCC_ACCESS_TOKEN` "
-            "(or `SCC_API_KEY`) in your environment."
+            "Missing SCC API key token. Set `SCC_API_KEY_TOKEN` in your environment."
         )
     return token
 
@@ -33,6 +32,20 @@ def get_access_token() -> str:
 def create_client() -> Any:
     client_cls, _ = _require_sdk()
     return client_cls(access_token=get_access_token())
+
+
+def get_org_id() -> str:
+    org_id = os.getenv("SCC_ORG_ID")
+    if not org_id:
+        raise SystemExit("Missing organization ID. Set `SCC_ORG_ID` in your environment.")
+    return org_id
+
+
+def get_claim_code() -> str:
+    claim_code = os.getenv("SCC_CLAIM_CODE")
+    if not claim_code:
+        raise SystemExit("Missing claim code. Set `SCC_CLAIM_CODE` in your environment.")
+    return claim_code
 
 
 def get_scc_error_type() -> Any:

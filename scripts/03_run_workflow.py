@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-"""Step 1: verify SCC SDK connectivity."""
+"""Step 3: run the placeholder SCC workflow."""
 
 from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from scc_sdk_workflows.connect import main
+from scc_sdk_workflows.run_workflow import main
 
 
 if __name__ == "__main__":
