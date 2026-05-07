@@ -10,7 +10,7 @@ from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 from openai import OpenAI
 
-from scc_sdk_workflows.client import get_access_token
+from scc_sdk_workflows.client import get_access_token, get_org_id
 
 MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "https://mcp.security.cisco.com/mcp")
 MODEL = os.getenv("LLM_MODEL", "gpt-4o")
@@ -22,7 +22,7 @@ You have access to Security Cloud Control MCP tools for reading organizations, s
 Guidelines:
 - Prefer read-only operations unless the user explicitly asks for a write action.
 - Present tool results clearly and concisely.
-- If the user asks about subscriptions, roles, users, or admin groups for an organization and does not specify an organization ID, default to the `SCC_ORG_ID` value from the environment.
+- If the user asks about subscriptions, roles, users, or admin groups for an organization and does not specify an organization ID, default to this organization ID from the environment: {default_org_id}.
 - If the user explicitly provides a different organization ID in the prompt, use that value instead.
 """
 
@@ -52,8 +52,9 @@ def mcp_tools_to_openai_tools(mcp_tools):
 
 async def agent_loop(session, tools, user_prompt, llm_client: OpenAI):
     openai_tools = mcp_tools_to_openai_tools(tools)
+    system_prompt = SYSTEM_PROMPT.format(default_org_id=get_org_id())
     messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
     ]
 
