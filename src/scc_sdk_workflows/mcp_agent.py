@@ -22,7 +22,8 @@ You have access to Security Cloud Control MCP tools for reading organizations, s
 Guidelines:
 - Prefer read-only operations unless the user explicitly asks for a write action.
 - Present tool results clearly and concisely.
-- If the user asks about subscriptions or roles, use the MCP tools to retrieve the information.
+- If the user asks about subscriptions, roles, users, or admin groups for an organization and does not specify an organization ID, default to the `SCC_ORG_ID` value from the environment.
+- If the user explicitly provides a different organization ID in the prompt, use that value instead.
 """
 
 
@@ -103,8 +104,9 @@ async def async_main() -> None:
             print("Connected to the Security Cloud Control MCP server.")
             print(f"{len(tools)} tools available.\n")
             print("Try prompts like:")
-            print("  - list my subscriptions")
-            print("  - list my roles\n")
+            print("  - List my organizations")
+            print("  - List my user roles in the organization")
+            print("  - List the admin groups for the organization\n")
 
             while True:
                 user_input = input("You: ").strip()

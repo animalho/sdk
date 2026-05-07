@@ -47,3 +47,11 @@ export LLM_BASE_URL="your-llm-endpoint"
 export LLM_API_KEY="your-llm-api-key"
 python3 scripts/04_mcp_agent.py
 ```
+
+Sample prompts:
+
+```text
+List my organizations
+List my user roles in the organization
+List the admin groups for the organization
+```
