@@ -34,11 +34,45 @@ Step 2, read claim code:
 python3 scripts/02_read_claim_code.py
 ```
 
-Step 3, placeholder workflow:
+Step 3, Cisco Live example workflow:
 
 ```bash
-python3 scripts/03_run_workflow.py
+python3 examples/cisco_live_example.py
 ```
+
+This example expects:
+
+- `SCC_ORG_ID`
+- `SCC_API_KEY_TOKEN`
+- `SCC_CLAIM_CODE`
+- optional `SCC_EXAMPLE_USERS_JSON`
+- optional `SCC_EXAMPLE_GROUPS_JSON`
+- optional `SCC_EXAMPLE_PRODUCT_FILTERS`
+
+Example configuration:
+
+```bash
+export SCC_EXAMPLE_USERS_JSON='[
+  {"email":"alice@example.com","firstName":"Alice","lastName":"Admin"},
+  {"email":"bob@example.com","firstName":"Bob","lastName":"Operator"}
+]'
+
+export SCC_EXAMPLE_GROUPS_JSON='[
+  {
+    "name":"Lab Security Cloud Admins",
+    "description":"Example admin group for the lab workflow",
+    "users":["alice@example.com","bob@example.com"],
+    "roles":[
+      {
+        "product":"Security Cloud Control",
+        "displayName":"Organization Administrator"
+      }
+    ]
+  }
+]'
+```
+
+`python3 scripts/03_run_workflow.py` remains available as a compatibility wrapper for the same workflow.
 
 Step 4, connect to the MCP agent:
 
