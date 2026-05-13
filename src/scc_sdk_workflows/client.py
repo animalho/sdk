@@ -29,9 +29,16 @@ def get_access_token() -> str:
     return token
 
 
+def get_base_url() -> str:
+    return os.getenv("SCC_BASE_URL", "https://api.security.cisco.com")
+
+
 def create_client() -> Any:
     client_cls, _ = _require_sdk()
-    return client_cls(access_token=get_access_token())
+    return client_cls(
+        access_token=get_access_token(),
+        base_url=get_base_url(),
+    )
 
 
 def get_org_id() -> str:
