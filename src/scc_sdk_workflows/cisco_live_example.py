@@ -15,15 +15,27 @@ from scc_sdk_workflows.client import (
 )
 
 DEFAULT_PRODUCT_FILTERS = ("Secure Access", "Firewall")
+DEFAULT_USERS = [
+    {
+        "email": "member1@cl-workshop.com",
+        "firstName": "Member",
+        "lastName": "Ciscolive",
+    },
+    {
+        "email": "member2@cl-workshop.com",
+        "firstName": "member2",
+        "lastName": "Ciscolive",
+    }
+]
+
 DEFAULT_GROUPS = [
     {
         "name": "Lab Security Cloud Admins",
         "description": "Example admin group for the lab workflow",
-        "users": [],
         "roles": [
             {
-                "product": "Security Cloud Control",
-                "displayName": "Organization Administrator",
+                "product": "Secure Access",
+                "displayName": "Security Admin",
             }
         ],
     }
@@ -44,7 +56,7 @@ def _load_json_env(var_name: str, default: Any) -> Any:
 
 
 def _load_users() -> list[dict[str, str]]:
-    return _load_json_env("SCC_EXAMPLE_USERS_JSON", [])
+    return _load_json_env("SCC_EXAMPLE_USERS_JSON", DEFAULT_USERS)
 
 
 def _load_groups() -> list[dict[str, Any]]:
