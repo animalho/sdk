@@ -149,10 +149,12 @@ def _find_role_id(
     roles_result: dict[str, Any], product_name: str, role_display_name: str
 ) -> str | None:
     for role in roles_result.get("roles", []):
-        if (
-            role.get("productName") == product_name
-            and role.get("roleDisplayName") == role_display_name
-        ):
+        product_names = [
+            product.get("name")
+            for product in role.get("products", [])
+            if isinstance(product, dict)
+        ]
+        if role.get("displayName") == role_display_name and product_name in product_names:
             return role.get("id")
     return None
 
