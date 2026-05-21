@@ -145,6 +145,18 @@ def _print_user_patch_results(patch_result: dict[str, Any]) -> None:
             print(f"    Error: {result['errorDescription']}")
 
 
+def _find_role_id(
+    roles_result: dict[str, Any], product_name: str, role_display_name: str
+) -> str | None:
+    for role in roles_result.get("roles", []):
+        if (
+            role.get("productName") == product_name
+            and role.get("roleDisplayName") == role_display_name
+        ):
+            return role.get("id")
+    return None
+
+
 def _invite_users(client: Any, org_id: str, users: list[dict[str, str]]) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     if not users:
@@ -230,6 +242,7 @@ def _assign_roles_to_groups(
     print("\nStep 5: Assigning roles to groups")
     assignment_results: list[dict[str, Any]] = []
     group_by_name = {group["name"]: group for group in created_groups}
+    roles_result = client.roles.list(org_id=org_id)
 
     for group in groups:
         created_group = group_by_name.get(group["name"])
@@ -237,8 +250,8 @@ def _assign_roles_to_groups(
             continue
 
         for role in group.get("roles", []):
-            role_id = client.roles.find_role_id(
-                org_id=org_id,
+            role_id = _find_role_id(
+                roles_result=roles_result,
                 product_name=role["product"],
                 role_display_name=role["displayName"],
             )
