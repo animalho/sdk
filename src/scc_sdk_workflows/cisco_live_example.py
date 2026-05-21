@@ -131,6 +131,19 @@ def _print_organization_details(organization: dict[str, Any]) -> None:
     print(f"  - Created: {organization.get('created')}")
 
 
+def _print_user_patch_results(patch_result: dict[str, Any]) -> None:
+    results = patch_result.get("results", [])
+    if not results:
+        print("  - No user invite results returned.")
+        return
+
+    for result in results:
+        email = result.get("email", "unknown")
+        status = result.get("status", "unknown")
+        print(f"  - {email}: {status}")
+        if result.get("errorDescription"):
+            print(f"    Error: {result['errorDescription']}")
+
 
 def _invite_users(client: Any, org_id: str, users: list[dict[str, str]]) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
@@ -148,7 +161,7 @@ def _invite_users(client: Any, org_id: str, users: list[dict[str, str]]) -> list
         }
         for user in users
     ])
-    client.users.print_patch_results(patch_result)
+    _print_user_patch_results(patch_result)
     results.extend(patch_result.get("results", []))
     return results
 
