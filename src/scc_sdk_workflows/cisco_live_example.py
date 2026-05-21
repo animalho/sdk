@@ -120,6 +120,17 @@ def _find_group(groups_result: dict[str, Any], name: str) -> dict[str, Any] | No
             return group
     return None
 
+def _print_organization_details(organization: dict[str, Any]) -> None:
+    print("\n✓ Organization Details:")
+    print(f"  - Name: {organization.get('name')}")
+    print(f"  - Type: {organization.get('type')}")
+    print(
+        "  - Region: "
+        f"{organization.get('regionCode')} - {organization.get('regionDescription')}"
+    )
+    print(f"  - Created: {organization.get('created')}")
+
+
 
 def _invite_users(client: Any, org_id: str, users: list[dict[str, str]]) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
@@ -264,7 +275,7 @@ def _run() -> None:
 
     print("Step 1: Getting organization details")
     organization = client.organizations.get(org_id=org_id)
-    client.organizations.print_details(organization)
+    _print_organization_details(organization)
 
     print("\nStep 2: Claiming subscriptions")
     claim_info = client.subscriptions.read_claim_code(org_id=org_id, claim_code=claim_code)
