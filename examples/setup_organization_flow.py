@@ -3,12 +3,11 @@
 """Run the end-to-end Security Cloud Control organization setup workflow."""
 
 from pathlib import Path
-import sys
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-
-from scc_sdk_workflows.setup_organization_flow import main
+import runpy
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    runpy.run_path(
+        str(Path(__file__).resolve().parents[1] / "scripts" / "03_setup_organization_flow.py"),
+        run_name="__main__",
+    )

@@ -2,6 +2,8 @@
 
 Runnable Cisco Security Cloud Control SDK workflow examples for use alongside the learning lab.
 
+The repo is intentionally flat: each runnable workflow lives directly in `scripts/` so the code is easy to browse without jumping through a package layer.
+
 ## Setup
 
 ```bash
