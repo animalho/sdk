@@ -37,7 +37,7 @@ python3 scripts/02_read_claim_code.py
 Step 3, organization setup workflow:
 
 ```bash
-python3 examples/setup_organization_flow.py
+python3 scripts/03_setup_organization_flow.py
 ```
 
 This example expects:
@@ -72,7 +72,7 @@ export SCC_EXAMPLE_GROUPS_JSON='[
 ]'
 ```
 
-`python3 scripts/03_run_workflow.py` remains available as a compatibility wrapper for the same workflow.
+You can also run the example directly with `python3 examples/setup_organization_flow.py`.
 
 Step 4, connect to the MCP agent:
 
