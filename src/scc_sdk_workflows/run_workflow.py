@@ -1,8 +1,8 @@
-"""Compatibility entry point for the Cisco Live workflow example."""
+"""Compatibility entry point for the organization setup workflow."""
 
 from __future__ import annotations
 
-from scc_sdk_workflows.cisco_live_example import main
+from scc_sdk_workflows.setup_organization_flow import main
 
 
 if __name__ == "__main__":
