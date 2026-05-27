@@ -106,7 +106,7 @@ async def async_main() -> None:
             print(f"{len(tools)} tools available.\n")
             print("Try prompts like:")
             print("  - List my organizations")
-            print("  - List my user roles in the organization")
+            print("  - List user roles in the organization")
             print("  - List the admin groups for the organization\n")
 
             while True:
