@@ -74,8 +74,6 @@ export SCC_EXAMPLE_GROUPS_JSON='[
 ]'
 ```
 
-You can also run the example directly with `python3 examples/setup_organization_flow.py`.
-
 Step 4, connect to the MCP agent:
 
 ```bash
