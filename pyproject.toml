@@ -13,7 +13,7 @@ dependencies = [
 [project.scripts]
 scc-list-orgs = "scc_sdk_workflows.list_orgs:main"
 scc-read-claim-code = "scc_sdk_workflows.read_claim_code:main"
-scc-run-workflow = "scc_sdk_workflows.run_workflow:main"
+scc-run-workflow = "scc_sdk_workflows.setup_organization_flow:main"
 scc-mcp-agent = "scc_sdk_workflows.mcp_agent:main"
 
 [build-system]

@@ -25,7 +25,7 @@ DEFAULT_USERS = [
         "email": "member2@cl-workshop.com",
         "firstName": "member2",
         "lastName": "Ciscolive",
-    }
+    },
 ]
 
 DEFAULT_GROUPS = [
@@ -95,7 +95,11 @@ def _select_products(
 
         allowed_regions = product.get("allowedRegions", [])
         selected_region = next(
-            (region for region in allowed_regions if region.get("regionCode") == preferred_region),
+            (
+                region
+                for region in allowed_regions
+                if region.get("regionCode") == preferred_region
+            ),
             allowed_regions[0] if allowed_regions else None,
         )
         if not selected_region:
@@ -119,6 +123,7 @@ def _find_group(groups_result: dict[str, Any], name: str) -> dict[str, Any] | No
         if group.get("name") == name:
             return group
     return None
+
 
 def _print_organization_details(organization: dict[str, Any]) -> None:
     print("\n✓ Organization Details:")
@@ -154,27 +159,35 @@ def _find_role_id(
             for product in role.get("products", [])
             if isinstance(product, dict)
         ]
-        if role.get("displayName") == role_display_name and product_name in product_names:
+        if (
+            role.get("displayName") == role_display_name
+            and product_name in product_names
+        ):
             return role.get("id")
     return None
 
 
-def _invite_users(client: Any, org_id: str, users: list[dict[str, str]]) -> list[dict[str, Any]]:
+def _invite_users(
+    client: Any, org_id: str, users: list[dict[str, str]]
+) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     if not users:
         print("Skipping user invitations: no SCC_EXAMPLE_USERS_JSON provided.")
         return results
 
     print("\nStep 3: Inviting users")
-    patch_result = client.users.patch(org_id=org_id, users=[
-        {
-            "email": user["email"],
-            "operation": "invite",
-            "firstName": user["firstName"],
-            "lastName": user["lastName"],
-        }
-        for user in users
-    ])
+    patch_result = client.users.patch(
+        org_id=org_id,
+        users=[
+            {
+                "email": user["email"],
+                "operation": "invite",
+                "firstName": user["firstName"],
+                "lastName": user["lastName"],
+            }
+            for user in users
+        ],
+    )
     _print_user_patch_results(patch_result)
     results.extend(patch_result.get("results", []))
     return results
@@ -306,7 +319,9 @@ def _run() -> None:
     _print_organization_details(organization)
 
     print("\nStep 2: Claiming subscriptions")
-    claim_info = client.subscriptions.read_claim_code(org_id=org_id, claim_code=claim_code)
+    claim_info = client.subscriptions.read_claim_code(
+        org_id=org_id, claim_code=claim_code
+    )
     selected_products = _select_products(
         claim_info=claim_info,
         preferred_region=preferred_region,
