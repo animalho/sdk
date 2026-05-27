@@ -14,7 +14,7 @@ from scc_sdk_workflows.client import (
     run_with_error_handling,
 )
 
-DEFAULT_PRODUCT_FILTERS = ("Secure Access", "Firewall", "AI Defense")
+DEFAULT_PRODUCT_FILTERS = ("Secure Access", "Firewall")
 DEFAULT_USERS = [
     {
         "email": "member1@cl-workshop.com",
