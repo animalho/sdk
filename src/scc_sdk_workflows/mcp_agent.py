@@ -108,7 +108,7 @@ async def async_main() -> None:
             print("  - List my organizations")
             print("  - List user roles in the organization")
             print("  - List the admin groups for the organization")
-            print("  - Change my organization name to <INSERT_ORG_NAME>\n")
+            print()
 
             while True:
                 user_input = input("You: ").strip()
